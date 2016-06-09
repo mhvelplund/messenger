@@ -1,10 +1,15 @@
+#include <iostream>
 #include "app_controller.h"
 
-// Contructor
-// You should init data here, since I/O is not setup yet.
-AppController::AppController() {
-	m_keyPad = new KeyPad();
-}
+#ifdef SDFS
+	AppController::AppController() :  m_sdfs(SD_SPI_MOSI, SD_SPI_MISO, SD_SPI_CLK, SD_SPI_CS, "sd") {
+		m_keyPad = new KeyPad();
+	}
+#else
+	AppController::AppController() {
+		m_keyPad = new KeyPad();
+	}
+#endif
 
 AppController::~AppController() {
     delete m_keyPad;
@@ -13,20 +18,18 @@ AppController::~AppController() {
 void AppController::monoWakeFromReset()
 {
     m_keyPad->show();
+	m_log.open("/sd/app.log");
+	m_log << "monoWakeFromReset()" << std::endl;
 }
 
 void AppController::monoWillGotoSleep()
 {
-    // Blank
+	m_log << "monoWillGotoSleep()" << std::endl;
+	m_log.close();
 }
 
 void AppController::monoWakeFromSleep()
 {
-    // Due to a software bug in the wake-up routines, we need to reset here!
-    // If not, Mono will go into an infinite loop!
     mono::IApplicationContext::SoftwareResetToApplication();
-    // We never reach this point in the code, CPU has reset!
-
-    // scheduleRepaint for all components
-    m_keyPad->scheduleRepaint();
+    monoWakeFromReset();
 }

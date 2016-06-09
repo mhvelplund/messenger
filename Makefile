@@ -8,11 +8,12 @@ TARGET=messenger
 
 include $(MONO_PATH)/mono.mk
 
+OPTIMIZATION = -Os
 ONLY_CPP_FLAGS += -std=c++11
+#CDEFS=-DSDFS
 
 # DO NOT DELETE
 
 KeyPad.o: KeyPad.h IKeyContainer.h MultiChoiceButton.h
 MultiChoiceButton.o: MultiChoiceButton.h IKeyContainer.h
-app_controller.o: app_controller.h KeyPad.h IKeyContainer.h
-app_controller.o: MultiChoiceButton.h
+app_controller.o: app_controller.h KeyPad.h IKeyContainer.h MultiChoiceButton.h

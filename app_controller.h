@@ -1,8 +1,14 @@
 #pragma once
 
 // Include the Mono Framework
+#include <iostream>
+#include <fstream>
 #include <mono.h>
 #include "KeyPad.h"
+
+#ifdef SDFS
+    #include <SDFileSystem.h>
+#endif
 
 // Import the mono and mono::ui namespaces into the context
 // to avoid writing long type names, like mono::ui::TextLabel
@@ -13,6 +19,12 @@ using namespace mono::ui;
 // This template app will show a "hello" text in the screen
 class AppController : public mono::IApplication {
 	KeyPad *m_keyPad;
+    std::ofstream m_log;
+
+#ifdef SDFS
+    SDFileSystem m_sdfs;
+#endif
+    
 public:
 
     // The default constructor
