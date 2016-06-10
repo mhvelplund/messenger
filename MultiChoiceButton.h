@@ -14,11 +14,11 @@ struct ButtonValue {
 class MultiChoiceButton : public mono::ui::ButtonView {
 	enum ButtonState { INACTIVE, ACTIVE };
 
-	IKeyContainer *m_keyContainer { nullptr };
+	IKeyContainer *m_keyContainer;
 	std::vector<ButtonValue> m_values; // Uninitialized!!!
-	int8_t m_currentValue { -1 };
-	ButtonState m_state { INACTIVE };
-	int8_t m_id { -1 };
+	int8_t m_currentValue;
+	ButtonState m_state;
+	int8_t m_id;
 	mono::String m_buttonText; // Uninitialized!!!
 
 protected:

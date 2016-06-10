@@ -6,7 +6,8 @@
 #include "MultiChoiceButton.h"
 
 class KeyPad : public virtual IKeyContainer, public mono::ui::View {
-	MultiChoiceButton m_buttons[12];
+	const static uint8_t BUTTON_COUNT = 12;
+	MultiChoiceButton m_buttons[BUTTON_COUNT];
 	mono::display::Color m_borderColor;
 	mono::display::Color m_borderColorPressed;
 

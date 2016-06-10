@@ -9,8 +9,14 @@ TARGET=messenger
 include $(MONO_PATH)/mono.mk
 
 OPTIMIZATION = -Os
-ONLY_CPP_FLAGS += -std=c++11
-#CDEFS=-DSDFS
+
+ifdef C11
+	ONLY_CPP_FLAGS += -std=c++11
+endif
+
+ifdef SDFS
+	CDEFS=-DSDFS
+endif
 
 # DO NOT DELETE
 

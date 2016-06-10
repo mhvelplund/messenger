@@ -21,7 +21,7 @@
 	når man klikker på en knap bliver parent notificeret (så andre aktive knapper kan blive deaktiveret)
 */
 
-MultiChoiceButton::MultiChoiceButton() {
+MultiChoiceButton::MultiChoiceButton() : m_keyContainer(0), m_currentValue(-1), m_state(INACTIVE), m_id(-1) {
 	setClickCallback<MultiChoiceButton>(this, &MultiChoiceButton::buttonClicked);
 }
 
